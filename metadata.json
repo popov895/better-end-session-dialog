@@ -1,0 +1,11 @@
+{
+    "uuid": "better-end-session-dialog@popov895.ukr.net",
+    "name": "Better End Session Dialog",
+    "description": "Show logout/reboot/shutdown together in the end session dialog",
+    "url": "https://github.com/popov895/better-end-session-dialog",
+    "version": 1,
+    "shell-version": ["42", "43", "44"],
+    "donations": {
+        "buymeacoffee": "popov895a"
+    }
+}
