@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-29 11:06+0200\n"
+"POT-Creation-Date: 2024-02-29 11:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:17
+#: extension.js:21
 msgid "Cancel"
 msgstr ""
 
-#: extension.js:23
+#: extension.js:27
 msgid "Log Out"
 msgstr ""
 
-#: extension.js:34
+#: extension.js:38
 msgid "Restart"
 msgstr ""
 
-#: extension.js:47
+#: extension.js:51
 msgid "Boot Options"
 msgstr ""
 
-#: extension.js:61
+#: extension.js:65
 msgid "Power Off"
 msgstr ""
