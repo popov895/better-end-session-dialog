@@ -22,35 +22,34 @@ class Extension {
             this.addButton({
                 label: _(`Log Out`),
                 action: () => {
-                    this.close(true);
                     const signalId = this.connect(`closed`, () => {
                         this.disconnect(signalId);
                         this._confirm(`ConfirmedLogout`);
                     });
+                    this.close(true);
                 },
             });
 
-            const rebootButton = this.addButton({
+            this._rebootButton = this.addButton({
                 label: _(`Restart`),
                 action: () => {
-                    this.close(true);
                     const signalId = this.connect(`closed`, () => {
                         this.disconnect(signalId);
                         this._confirm(`ConfirmedReboot`);
                     });
+                    this.close(true);
                 },
             });
 
             if (this._canRebootToBootLoaderMenu) {
-                this._rebootButton = rebootButton;
                 this._rebootButtonAlt = this.addButton({
                     label: _(`Boot Options`),
                     action: () => {
-                        this.close(true);
                         const signalId = this.connect(`closed`, () => {
                             this.disconnect(signalId);
                             this._confirmRebootToBootLoaderMenu();
                         });
+                        this.close(true);
                     },
                 });
                 this._rebootButtonAlt.visible = false;
@@ -60,11 +59,11 @@ class Extension {
             this.addButton({
                 label: _(`Power Off`),
                 action: () => {
-                    this.close(true);
                     const signalId = this.connect(`closed`, () => {
                         this.disconnect(signalId);
                         this._confirm(`ConfirmedShutdown`);
                     });
+                    this.close(true);
                 },
             });
         };
