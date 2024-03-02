@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-01 21:55+0200\n"
+"POT-Creation-Date: 2024-03-02 16:20+0200\n"
 "PO-Revision-Date: 2024-02-29 11:07+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -27,14 +27,18 @@ msgstr "Скасувати"
 msgid "Log Out"
 msgstr "Вийти"
 
-#: extension.js:34
+#: extension.js:35
+msgid "Restart &amp; Install"
+msgstr ""
+
+#: extension.js:35
 msgid "Restart"
 msgstr "Перезапустити"
 
-#: extension.js:46
+#: extension.js:47
 msgid "Boot Options"
 msgstr "Параметри завантаження"
 
-#: extension.js:60
+#: extension.js:61
 msgid "Power Off"
 msgstr "Вимкнути"
