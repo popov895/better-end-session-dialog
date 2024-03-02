@@ -30,8 +30,9 @@ class Extension {
                 },
             });
 
+            const rebootAndInstall = this._pkOfflineProxy && (this._updateInfo.UpdateTriggered || this._updateInfo.UpgradeTriggered);
             this._rebootButton = this.addButton({
-                label: _(`Restart`),
+                label: rebootAndInstall ? _(`Restart &amp; Install`) : _(`Restart`),
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
                         this.disconnect(signalId);
