@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-02 16:27+0200\n"
-"PO-Revision-Date: 2024-02-29 11:07+0200\n"
+"PO-Revision-Date: 2024-03-02 16:28+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk\n"
@@ -29,7 +29,7 @@ msgstr "Вийти"
 
 #: extension.js:34
 msgid "Restart &amp; Install"
-msgstr ""
+msgstr "Перезапустити та встановити"
 
 #: extension.js:34
 msgid "Restart"
