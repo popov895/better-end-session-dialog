@@ -13,14 +13,23 @@ class Extension {
         EndSessionDialog.prototype._updateButtons = function () {
             this.clearButtons();
 
-            this.addButton({
+            const addButton = (buttonInfo) => {
+                const button = this.addButton(buttonInfo);
+                if (buttonInfo.setKeyFocus) {
+                    this.setInitialKeyFocus(button);
+                }
+                return button;
+            };
+
+            addButton({
                 label: _(`Cancel`),
                 key: Clutter.KEY_Escape,
                 action: this.cancel.bind(this),
             });
 
-            this.addButton({
+            addButton({
                 label: _(`Log Out`),
+                setKeyFocus: this._type === 0,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
                         this.disconnect(signalId);
@@ -31,8 +40,9 @@ class Extension {
             });
 
             const rebootAndInstall = this._pkOfflineProxy && (this._updateInfo.UpdateTriggered || this._updateInfo.UpgradeTriggered);
-            this._rebootButton = this.addButton({
+            this._rebootButton = addButton({
                 label: rebootAndInstall ? _(`Restart &amp; Install`) : _(`Restart`),
+                setKeyFocus: this._type >= 2 && this._type <= 4,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
                         this.disconnect(signalId);
@@ -43,7 +53,7 @@ class Extension {
             });
 
             if (this._canRebootToBootLoaderMenu) {
-                this._rebootButtonAlt = this.addButton({
+                this._rebootButtonAlt = addButton({
                     label: _(`Boot Options`),
                     action: () => {
                         const signalId = this.connect(`closed`, () => {
@@ -57,8 +67,9 @@ class Extension {
                 this._capturedEventId = this.connect(`captured-event`, this._onCapturedEvent.bind(this));
             }
 
-            this.addButton({
+            addButton({
                 label: _(`Power Off`),
+                setKeyFocus: this._type === 1,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
                         this.disconnect(signalId);
