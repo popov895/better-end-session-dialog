@@ -1,9 +1,14 @@
 'use strict';
 
 import Clutter from 'gi://Clutter';
+import GLib from 'gi://GLib';
 
 import { EndSessionDialog } from 'resource:///org/gnome/shell/ui/endSessionDialog.js';
-import { Extension, InjectionManager, gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
+import { Extension, InjectionManager } from 'resource:///org/gnome/shell/extensions/extension.js';
+
+const _ = (text, context, domain = `gnome-shell`) => {
+    return context ? GLib.dpgettext2(domain, context, text) : GLib.dgettext(domain, text);
+};
 
 export default class extends Extension {
     enable() {
@@ -27,7 +32,7 @@ export default class extends Extension {
                 });
 
                 addButton({
-                    label: _(`Log Out`),
+                    label: _(`Log Out`, `button`),
                     setKeyFocus: this._type === 0,
                     action: () => {
                         const signalId = this.connect(`closed`, () => {
@@ -40,7 +45,7 @@ export default class extends Extension {
 
                 const rebootAndInstall = this._pkOfflineProxy && (this._updateInfo.UpdateTriggered || this._updateInfo.UpgradeTriggered);
                 this._rebootButton = addButton({
-                    label: rebootAndInstall ? _(`Restart &amp; Install`) : _(`Restart`),
+                    label: rebootAndInstall ? _(`Restart &amp; Install`, `button`) : _(`Restart`, `button`),
                     setKeyFocus: this._type >= 2 && this._type <= 4,
                     action: () => {
                         const signalId = this.connect(`closed`, () => {
@@ -53,7 +58,7 @@ export default class extends Extension {
 
                 if (this._canRebootToBootLoaderMenu) {
                     this._rebootButtonAlt = addButton({
-                        label: _(`Boot Options`),
+                        label: _(`Boot Options`, `button`),
                         action: () => {
                             const signalId = this.connect(`closed`, () => {
                                 this.disconnect(signalId);
@@ -67,7 +72,7 @@ export default class extends Extension {
                 }
 
                 addButton({
-                    label: _(`Power Off`),
+                    label: _(`Power Off`, `button`),
                     setKeyFocus: this._type === 1,
                     action: () => {
                         const signalId = this.connect(`closed`, () => {
