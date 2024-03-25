@@ -4,8 +4,18 @@ const { Clutter } = imports.gi;
 
 const EndSessionDialog = imports.ui.endSessionDialog.EndSessionDialog;
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const _ = ExtensionUtils.gettext;
+const Gettext = imports.gettext;
+
+function gettext(msg)
+{
+    return Gettext.dgettext("gnome-shell", msg);
+}
+
+
+function pgettext(ctx, msg)
+{
+    return Gettext.dpgettext("gnome-shell", ctx, msg);
+}
 
 class Extension {
     enable() {
@@ -22,13 +32,13 @@ class Extension {
             };
 
             addButton({
-                label: _(`Cancel`),
+                label: gettext("Cancel"),
                 key: Clutter.KEY_Escape,
                 action: this.cancel.bind(this),
             });
 
             addButton({
-                label: _(`Log Out`),
+                label: pgettext("button", "Log Out"),
                 setKeyFocus: this._type === 0,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
@@ -41,7 +51,7 @@ class Extension {
 
             const rebootAndInstall = this._pkOfflineProxy && (this._updateInfo.UpdateTriggered || this._updateInfo.UpgradeTriggered);
             this._rebootButton = addButton({
-                label: rebootAndInstall ? _(`Restart &amp; Install`) : _(`Restart`),
+                label: rebootAndInstall ? pgettext("button", "Restart &amp; Install") : pgettext("button", "Restart"),
                 setKeyFocus: this._type >= 2 && this._type <= 4,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
@@ -54,7 +64,7 @@ class Extension {
 
             if (this._canRebootToBootLoaderMenu) {
                 this._rebootButtonAlt = addButton({
-                    label: _(`Boot Options`),
+                    label: pgettext("button", "Boot Options"),
                     action: () => {
                         const signalId = this.connect(`closed`, () => {
                             this.disconnect(signalId);
@@ -68,7 +78,7 @@ class Extension {
             }
 
             addButton({
-                label: _(`Power Off`),
+                label: pgettext("button", "Power Off"),
                 setKeyFocus: this._type === 1,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
@@ -88,7 +98,5 @@ class Extension {
 }
 
 var init = () => {
-    ExtensionUtils.initTranslations(ExtensionUtils.getCurrentExtension().uuid);
-
     return new Extension();
 };
