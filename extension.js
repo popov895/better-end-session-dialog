@@ -1,11 +1,12 @@
 'use strict';
 
-const { Clutter } = imports.gi;
+const { Clutter, GLib } = imports.gi;
 
 const EndSessionDialog = imports.ui.endSessionDialog.EndSessionDialog;
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const _ = ExtensionUtils.gettext;
+const _ = (text, context, domain = `gnome-shell`) => {
+    return context ? GLib.dpgettext2(domain, context, text) : GLib.dgettext(domain, text);
+};
 
 class Extension {
     enable() {
@@ -28,7 +29,7 @@ class Extension {
             });
 
             addButton({
-                label: _(`Log Out`),
+                label: _(`Log Out`, `button`),
                 setKeyFocus: this._type === 0,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
@@ -41,7 +42,7 @@ class Extension {
 
             const rebootAndInstall = this._pkOfflineProxy && (this._updateInfo.UpdateTriggered || this._updateInfo.UpgradeTriggered);
             this._rebootButton = addButton({
-                label: rebootAndInstall ? _(`Restart &amp; Install`) : _(`Restart`),
+                label: rebootAndInstall ? _(`Restart &amp; Install`, `button`) : _(`Restart`, `button`),
                 setKeyFocus: this._type >= 2 && this._type <= 4,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
@@ -54,7 +55,7 @@ class Extension {
 
             if (this._canRebootToBootLoaderMenu) {
                 this._rebootButtonAlt = addButton({
-                    label: _(`Boot Options`),
+                    label: _(`Boot Options`, `button`),
                     action: () => {
                         const signalId = this.connect(`closed`, () => {
                             this.disconnect(signalId);
@@ -68,7 +69,7 @@ class Extension {
             }
 
             addButton({
-                label: _(`Power Off`),
+                label: _(`Power Off`, `button`),
                 setKeyFocus: this._type === 1,
                 action: () => {
                     const signalId = this.connect(`closed`, () => {
@@ -88,7 +89,5 @@ class Extension {
 }
 
 var init = () => {
-    ExtensionUtils.initTranslations(ExtensionUtils.getCurrentExtension().uuid);
-
     return new Extension();
 };
