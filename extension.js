@@ -5,6 +5,7 @@ import GLib from 'gi://GLib';
 
 import { EndSessionDialog } from 'resource:///org/gnome/shell/ui/endSessionDialog.js';
 import { Extension, InjectionManager } from 'resource:///org/gnome/shell/extensions/extension.js';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
 const _ = (text, context, domain = `gnome-shell`) => {
     return context ? GLib.dpgettext2(domain, context, text) : GLib.dgettext(domain, text);
@@ -31,17 +32,19 @@ export default class extends Extension {
                     action: this.cancel.bind(this),
                 });
 
-                addButton({
-                    label: _(`Log Out`, `button`),
-                    setKeyFocus: this._type === 0,
-                    action: () => {
-                        const signalId = this.connect(`closed`, () => {
-                            this.disconnect(signalId);
-                            this._confirm(`ConfirmedLogout`).catch(logError);
-                        });
-                        this.close(true);
-                    },
-                });
+                if (Main.sessionMode.currentMode === `user` || Main.sessionMode.parentMode === `user`) {
+                    addButton({
+                        label: _(`Log Out`, `button`),
+                        setKeyFocus: this._type === 0,
+                        action: () => {
+                            const signalId = this.connect(`closed`, () => {
+                                this.disconnect(signalId);
+                                this._confirm(`ConfirmedLogout`).catch(logError);
+                            });
+                            this.close(true);
+                        },
+                    });
+                }
 
                 const rebootAndInstall = this._pkOfflineProxy && (this._updateInfo.UpdateTriggered || this._updateInfo.UpgradeTriggered);
                 this._rebootButton = addButton({
