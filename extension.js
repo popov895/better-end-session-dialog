@@ -3,20 +3,27 @@
 import Clutter from 'gi://Clutter';
 import GLib from 'gi://GLib';
 
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as SystemActions from 'resource:///org/gnome/shell/misc/systemActions.js';
+
 import { EndSessionDialog } from 'resource:///org/gnome/shell/ui/endSessionDialog.js';
 import { Extension, InjectionManager } from 'resource:///org/gnome/shell/extensions/extension.js';
-import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 
-const _ = (text, context, domain = `gnome-shell`) => {
-    return context ? GLib.dpgettext2(domain, context, text) : GLib.dgettext(domain, text);
-};
+import { Preferences } from './lib/preferences.js';
+import { _, logError } from './lib/utils.js';
 
 export default class extends Extension {
     enable() {
+        this._preferences = new Preferences(this);
+
+        const extension = this;
+
         this._injectionManager = new InjectionManager();
         this._injectionManager.overrideMethod(EndSessionDialog.prototype, `_updateButtons`, () => {
             return function () {
                 this.clearButtons();
+
+                const systemActions = SystemActions.getDefault();
 
                 const addButton = (buttonInfo) => {
                     const button = this.addButton(buttonInfo);
@@ -31,6 +38,19 @@ export default class extends Extension {
                     key: Clutter.KEY_Escape,
                     action: this.cancel.bind(this),
                 });
+
+                if (extension._preferences.showSuspendButton && systemActions.canSuspend) {
+                    addButton({
+                        label: _(`Suspend`, `button`),
+                        action: () => {
+                            const signalId = this.connect(`closed`, () => {
+                                this.disconnect(signalId);
+                                systemActions.activateSuspend();
+                            });
+                            this.cancel();
+                        },
+                    });
+                }
 
                 if (Main.sessionMode.currentMode === `user` || Main.sessionMode.parentMode === `user`) {
                     addButton({
@@ -92,5 +112,8 @@ export default class extends Extension {
     disable() {
         this._injectionManager.clear();
         delete this._injectionManager;
+
+        this._preferences.destroy();
+        delete this._preferences;
     }
 }

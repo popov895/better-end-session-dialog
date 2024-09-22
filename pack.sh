@@ -1,3 +1,3 @@
 #!/bin/bash
 
-gnome-extensions pack --force --out-dir=..
+gnome-extensions pack --force --extra-source=lib --out-dir=..
