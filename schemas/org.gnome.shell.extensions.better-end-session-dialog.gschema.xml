@@ -4,5 +4,8 @@
         <key name="show-suspend-button" type="b">
             <default>false</default>
         </key>
+        <key name="show-hibernate-button" type="b">
+            <default>false</default>
+        </key>
     </schema>
 </schemalist>

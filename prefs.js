@@ -31,10 +31,27 @@ export default class extends ExtensionPreferences {
         });
         suspendButtonRow.add_suffix(suspendButtonSwitch);
 
+        const hibernateButtonSwitch = new Gtk.Switch({
+            valign: Gtk.Align.CENTER,
+        });
+        window._preferences.bind_property(
+            `showHibernateButton`,
+            hibernateButtonSwitch,
+            `active`,
+            GObject.BindingFlags.BIDIRECTIONAL | GObject.BindingFlags.SYNC_CREATE
+        );
+
+        const hibernateButtonRow = new Adw.ActionRow({
+            activatable_widget: hibernateButtonSwitch,
+            title: _(`Show hibernate button`),
+        });
+        hibernateButtonRow.add_suffix(hibernateButtonSwitch);
+
         const generalGroup = new Adw.PreferencesGroup({
             title: _(`General`, `General options`),
         });
         generalGroup.add(suspendButtonRow);
+        generalGroup.add(hibernateButtonRow);
 
         const page = new Adw.PreferencesPage();
         page.add(generalGroup);
