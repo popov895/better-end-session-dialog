@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-22 21:49+0000\n"
+"POT-Creation-Date: 2024-09-24 19:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,36 +17,41 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: extension.js:37
+#: extension.js:100
 msgid "Cancel"
 msgstr ""
 
-#: extension.js:44
+#: extension.js:107
+msgctxt "button"
+msgid "Hibernate"
+msgstr ""
+
+#: extension.js:120
 msgctxt "button"
 msgid "Suspend"
 msgstr ""
 
-#: extension.js:57
+#: extension.js:133
 msgctxt "button"
 msgid "Log Out"
 msgstr ""
 
-#: extension.js:71
+#: extension.js:147
 msgctxt "button"
 msgid "Restart &amp; Install"
 msgstr ""
 
-#: extension.js:71
+#: extension.js:147
 msgctxt "button"
 msgid "Restart"
 msgstr ""
 
-#: extension.js:84
+#: extension.js:160
 msgctxt "button"
 msgid "Boot Options"
 msgstr ""
 
-#: extension.js:98
+#: extension.js:174
 msgctxt "button"
 msgid "Power Off"
 msgstr ""
@@ -55,7 +60,11 @@ msgstr ""
 msgid "Show suspend button"
 msgstr ""
 
-#: prefs.js:35
+#: prefs.js:46
+msgid "Show hibernate button"
+msgstr ""
+
+#: prefs.js:51
 msgctxt "General options"
 msgid "General"
 msgstr ""
