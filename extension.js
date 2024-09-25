@@ -9,7 +9,7 @@ const SystemActions = imports.misc.systemActions;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension = ExtensionUtils.getCurrentExtension();
 const { Preferences } = Extension.imports.lib.preferences;
-const { _ } = Extension.imports.lib.utils;
+const { _, logError } = Extension.imports.lib.utils;
 
 const LoginManagerProxy = Gio.DBusProxy.makeProxyWrapper(`
     <node>
@@ -32,11 +32,11 @@ class LoginManager {
             `/org/freedesktop/login1`,
             (...[, error]) => {
                 if (error) {
-                    this._logError(error);
+                    logError(error);
                 } else {
                     this._proxy.CanHibernateRemote((result, error) => {
                         if (error) {
-                            this._logError(error);
+                            logError(error);
                         } else {
                             this._canHibernate = [`yes`, `challenge`].includes(result[0]);
                         }
@@ -57,13 +57,9 @@ class LoginManager {
 
         this._proxy.HibernateRemote(true, (...[, error]) => {
             if (error) {
-                this._logError(error);
+                logError(error);
             }
         });
-    }
-
-    _logError(error) {
-        console.error(`${Extension.uuid}:`, error);
     }
 }
 
