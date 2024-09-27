@@ -30,13 +30,13 @@ class LoginManager {
             Gio.DBus.system,
             `org.freedesktop.login1`,
             `/org/freedesktop/login1`,
-            (...[, error]) => {
+            (proxy, error) => {
                 if (error) {
-                    logError(error);
+                    logError(`Failed to connect to the ${proxy.g_interface_name} D-Bus interface`, error);
                 } else {
-                    this._proxy.CanHibernateRemote((result, error) => {
+                    proxy.CanHibernateRemote((result, error) => {
                         if (error) {
-                            logError(error);
+                            logError(`Failed to call the CanHibernate method of the ${proxy.g_interface_name} D-Bus interface`, error);
                         } else {
                             this._canHibernate = [`yes`, `challenge`].includes(result[0]);
                         }
@@ -57,7 +57,7 @@ class LoginManager {
 
         this._proxy.HibernateRemote(true, (...[, error]) => {
             if (error) {
-                logError(error);
+                logError(`Failed to call the Hibernate method of the ${this._proxy.g_interface_name} D-Bus interface`, error);
             }
         });
     }
