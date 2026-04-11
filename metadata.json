@@ -4,7 +4,7 @@
     "description": "Show logout/reboot/shutdown together in the end session dialog",
     "url": "https://github.com/popov895/better-end-session-dialog",
     "version": 10,
-    "shell-version": ["45", "46", "47", "48", "49"],
+    "shell-version": ["50"],
     "settings-schema": "org.gnome.shell.extensions.better-end-session-dialog",
     "donations": {
         "custom": "https://github.com/popov895/popov895"

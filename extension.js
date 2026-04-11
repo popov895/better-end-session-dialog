@@ -142,9 +142,8 @@ export default class extends Extension {
                     });
                 }
 
-                const rebootAndInstall = this._pkOfflineProxy && (this._updateInfo.UpdateTriggered || this._updateInfo.UpgradeTriggered);
                 this._rebootButton = addButton({
-                    label: rebootAndInstall ? _(`Restart &amp; Install`, `button`) : _(`Restart`, `button`),
+                    label: this._updateScheduled ? _(`Restart & Install`, `button`) : _(`Restart`, `button`),
                     setKeyFocus: this._type >= 2 && this._type <= 4,
                     action: () => {
                         const signalId = this.connect(`closed`, () => {
