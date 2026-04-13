@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-24 19:12+0000\n"
+"PO-Revision-Date: 2026-04-12 23:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: prefs.js:32
+msgid "Show suspend button"
+msgstr "Zeige Bereitschafts-Schaltfläche"
+
+#: prefs.js:48
+msgid "Show hibernate button"
+msgstr "Zeige Ruhezustands-Schaltfläche"
+
+#: prefs.js:53
+msgctxt "General options"
+msgid "General"
+msgstr "Allgemein"
+
+#: extension.js:105
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: extension.js:112
+msgctxt "button"
+msgid "Hibernate"
+msgstr "Ruhezustand"
+
+#: extension.js:125
+msgctxt "button"
+msgid "Suspend"
+msgstr "Bereitsschaft"
+
+#: extension.js:138
+msgctxt "button"
+msgid "Log Out"
+msgstr "Abmelden"
+
+#: extension.js:152
+msgctxt "button"
+msgid "Restart & Install"
+msgstr "Neustarten &amp; Installieren"
+
+#: extension.js:152
+msgctxt "button"
+msgid "Restart"
+msgstr "Neustarten"
+
+#: extension.js:165
+msgctxt "button"
+msgid "Boot Options"
+msgstr "Boot-Optionen"
+
+#: extension.js:179
+msgctxt "button"
+msgid "Power Off"
+msgstr "Herunterfahren"
